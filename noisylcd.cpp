@@ -4,11 +4,8 @@
 #include "ui_noisylcd.h"
 #include "noisysettings.h"
 
-NoisyLCD::NoisyLCD(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::NoisyLCD)
+NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
 {
-    ui->setupUi(this);
     settings = new NoisySettings(this);
 
     installEventFilter(this);
@@ -17,7 +14,6 @@ NoisyLCD::NoisyLCD(QWidget *parent) :
 
 NoisyLCD::~NoisyLCD()
 {
-    delete ui;
 }
 
 bool NoisyLCD::eventFilter(QObject *object, QEvent *event)

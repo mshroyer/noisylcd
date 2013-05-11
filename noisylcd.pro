@@ -17,5 +17,5 @@ SOURCES += main.cpp\
 HEADERS  += noisylcd.h \
     noisysettings.h
 
-FORMS    += noisylcd.ui \
+FORMS    += \
     noisysettings.ui

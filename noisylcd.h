@@ -4,10 +4,6 @@
 #include <QMainWindow>
 #include "noisysettings.h"
 
-namespace Ui {
-class NoisyLCD;
-}
-
 class NoisyLCD : public QMainWindow
 {
     Q_OBJECT
@@ -20,7 +16,6 @@ protected:
     bool eventFilter(QObject *object, QEvent *event);
 
 private:
-    Ui::NoisyLCD *ui;
     NoisySettings *settings;
 
 signals:
