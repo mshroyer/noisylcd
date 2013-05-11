@@ -2,6 +2,7 @@
 #define NOISYLCD_H
 
 #include <QMainWindow>
+#include <QGraphicsView>
 #include "noisysettings.h"
 
 class NoisyLCD : public QMainWindow
@@ -17,6 +18,7 @@ protected:
 
 private:
     NoisySettings *settings;
+    QGraphicsView *gv;
 
 signals:
     void mouseReleaseEvent(QMouseEvent *);

@@ -1,15 +1,22 @@
-#include <QDebug>
-
 #include "noisylcd.h"
 #include "ui_noisylcd.h"
 #include "noisysettings.h"
+
+#include <QDebug>
 
 NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
 {
     settings = new NoisySettings(this);
 
-    installEventFilter(this);
+    gv = new QGraphicsView(this);
+
+    setCentralWidget(gv);
+    //gv->viewport()->setFocusProxy(0);
+    gv->viewport()->installEventFilter(this);
+
     connect(this, SIGNAL(mouseReleaseEvent(QMouseEvent*)), settings, SLOT(show()));
+
+    showFullScreen();
 }
 
 NoisyLCD::~NoisyLCD()
@@ -18,7 +25,7 @@ NoisyLCD::~NoisyLCD()
 
 bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
 {
-    if (object == this && event->type() == QEvent::MouseButtonRelease) {
+    if (event->type() == QEvent::MouseButtonRelease) {
         emit mouseReleaseEvent((QMouseEvent*)event);
         return true;
     } else {
