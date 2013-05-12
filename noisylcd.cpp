@@ -9,14 +9,13 @@ NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
     settings = new NoisySettings(this);
 
     gv = new QGraphicsView(this);
-
     setCentralWidget(gv);
     //gv->viewport()->setFocusProxy(0);
     gv->viewport()->installEventFilter(this);
 
-    connect(this, SIGNAL(mouseReleaseEvent(QMouseEvent*)), settings, SLOT(show()));
-
     showFullScreen();
+
+    connect(this, SIGNAL(mouseReleaseEvent(QMouseEvent*)), settings, SLOT(show()));
 }
 
 NoisyLCD::~NoisyLCD()

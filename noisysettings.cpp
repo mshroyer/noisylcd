@@ -1,5 +1,10 @@
+#include <QRect>
+
 #include "noisysettings.h"
 #include "ui_noisysettings.h"
+
+const double opacityFull = 1.0;
+const double opacityPartial = 0.3;
 
 NoisySettings::NoisySettings(QWidget *parent) :
     QDialog(parent),
@@ -7,7 +12,16 @@ NoisySettings::NoisySettings(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // We have to show the window before frameGeometry() will return anything meaningful here
+    setWindowOpacity(0.0);
+    show();
+    QRect frameRect = this->frameGeometry();
+    int xOffset = parentWidget()->width() - frameRect.width() - 10;
+    int yOffset = parentWidget()->height() - frameRect.height() - 10;
+    move(xOffset, yOffset);
+
     installEventFilter(this);
+    setWindowOpacity(opacityPartial);
 }
 
 NoisySettings::~NoisySettings()
@@ -18,11 +32,11 @@ NoisySettings::~NoisySettings()
 bool NoisySettings::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::Enter) {
-        setWindowOpacity(1.0);
+        setWindowOpacity(opacityFull);
         emit enter();
         return true;
     } else if (event->type() == QEvent::Leave) {
-        setWindowOpacity(0.2);
+        setWindowOpacity(opacityPartial);
         emit leave();
         return true;
     } else {

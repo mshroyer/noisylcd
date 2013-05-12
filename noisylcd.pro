@@ -6,6 +6,8 @@
 
 QT       += core gui
 
+QMAKE_CXXFLAGS += -Wall
+
 TARGET = noisylcd
 TEMPLATE = app
 
