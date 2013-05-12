@@ -14,9 +14,16 @@ class NoisySettings : public QDialog
 public:
     explicit NoisySettings(QWidget *parent = 0);
     ~NoisySettings();
-    
+
+protected:
+    bool eventFilter(QObject *object, QEvent *event);
+
 private:
     Ui::NoisySettings *ui;
+
+signals:
+    void enter();
+    void leave();
 };
 
 #endif // NOISYSETTINGS_H
