@@ -38,13 +38,16 @@ bool NoisySettings::eventFilter(QObject *object, QEvent *event)
 
 void NoisySettings::showEvent(QShowEvent *event)
 {
+    const int margin = 10;
+
     if (hasBeenShown)
         return;
 
-    // We have to show the window before frameGeometry() will return anything meaningful here
+    // Position the dialog window in the lowe-right corner of the screen the
+    // first time it is displayed.
     QRect frameRect = this->frameGeometry();
-    int xOffset = parentWidget()->width() - frameRect.width() - 10;
-    int yOffset = parentWidget()->height() - frameRect.height() - 10;
+    int xOffset = parentWidget()->width() - frameRect.width() - margin;
+    int yOffset = parentWidget()->height() - frameRect.height() - margin;
     move(xOffset, yOffset);
     setWindowOpacity(opacityPartial);
     hasBeenShown = true;
