@@ -17,9 +17,11 @@ public:
 
 protected:
     bool eventFilter(QObject *object, QEvent *event);
+    void showEvent(QShowEvent *event);
 
 private:
     Ui::NoisySettings *ui;
+    bool hasBeenShown = false;
 
 signals:
     void enter();

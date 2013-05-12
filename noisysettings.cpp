@@ -12,16 +12,8 @@ NoisySettings::NoisySettings(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // We have to show the window before frameGeometry() will return anything meaningful here
-    setWindowOpacity(0.0);
-    show();
-    QRect frameRect = this->frameGeometry();
-    int xOffset = parentWidget()->width() - frameRect.width() - 10;
-    int yOffset = parentWidget()->height() - frameRect.height() - 10;
-    move(xOffset, yOffset);
-
     installEventFilter(this);
-    setWindowOpacity(opacityPartial);
+    setWindowOpacity(0.0);
 }
 
 NoisySettings::~NoisySettings()
@@ -42,4 +34,18 @@ bool NoisySettings::eventFilter(QObject *object, QEvent *event)
     } else {
         return false;
     }
+}
+
+void NoisySettings::showEvent(QShowEvent *event)
+{
+    if (hasBeenShown)
+        return;
+
+    // We have to show the window before frameGeometry() will return anything meaningful here
+    QRect frameRect = this->frameGeometry();
+    int xOffset = parentWidget()->width() - frameRect.width() - 10;
+    int yOffset = parentWidget()->height() - frameRect.height() - 10;
+    move(xOffset, yOffset);
+    setWindowOpacity(opacityPartial);
+    hasBeenShown = true;
 }
