@@ -3,6 +3,8 @@
 #include "noisysettings.h"
 
 #include <QDebug>
+#include <QPainter>
+#include <QPaintEvent>
 
 NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
 {
@@ -30,4 +32,19 @@ bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
     } else {
         return false;
     }
+}
+
+void NoisyLCD::paintEvent(QPaintEvent *event)
+{
+    event->accept();
+
+    QPainter painter(gv->viewport());
+    //painter.begin();
+    painter.setPen(Qt::blue);
+    painter.drawRect(x(), y(), 10, 10);
+    //painter.end();
+}
+
+void NoisyLCD::updatePattern(int lines, double dutyCycle)
+{
 }

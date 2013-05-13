@@ -10,20 +10,68 @@
     <x>0</x>
     <y>0</y>
     <width>287</width>
-    <height>369</height>
+    <height>96</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>NoisyLCD Settings</string>
   </property>
-  <widget class="QDial" name="dial">
+  <widget class="QDoubleSpinBox" name="refresh">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>20</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="value">
+    <double>60.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="refreshLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>10</y>
-     <width>50</width>
-     <height>64</height>
+     <y>20</y>
+     <width>161</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>Refresh rate (Hz)</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="frequency">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>50</y>
+     <width>111</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="value">
+    <double>4.800000000000000</double>
+   </property>
+  </widget>
+  <widget class="QLabel" name="frequencyLabel">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Frequency (kHz)</string>
    </property>
   </widget>
  </widget>

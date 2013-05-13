@@ -15,6 +15,7 @@ public:
 
 protected:
     bool eventFilter(QObject *object, QEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
     NoisySettings *settings;
@@ -22,6 +23,9 @@ private:
 
 signals:
     void mouseReleaseEvent(QMouseEvent *);
+
+public slots:
+    void updatePattern(int lines, double dutyCycle);
 };
 
 #endif // NOISYLCD_H
