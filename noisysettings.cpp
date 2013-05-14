@@ -4,7 +4,7 @@
 #include "ui_noisysettings.h"
 
 const double opacityFull = 1.0;
-const double opacityPartial = 0.3;
+const double opacityPartial = 0.4;
 
 NoisySettings::NoisySettings(QWidget *parent) :
     QDialog(parent),

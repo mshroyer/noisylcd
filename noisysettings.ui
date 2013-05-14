@@ -48,7 +48,7 @@
     <string>Refresh rate (Hz)</string>
    </property>
   </widget>
-  <widget class="QDoubleSpinBox" name="frequency">
+  <widget class="QDoubleSpinBox" name="tone">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -61,7 +61,7 @@
     <double>4.800000000000000</double>
    </property>
   </widget>
-  <widget class="QLabel" name="frequencyLabel">
+  <widget class="QLabel" name="toneLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -71,7 +71,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Frequency (kHz)</string>
+    <string>Tone (kHz)</string>
    </property>
   </widget>
  </widget>
