@@ -14,6 +14,7 @@ class NoisySettings : public QDialog
 public:
     explicit NoisySettings(QWidget *parent = 0);
     ~NoisySettings();
+    friend class NoisyLCD;
 
 protected:
     bool eventFilter(QObject *object, QEvent *event);
@@ -26,6 +27,9 @@ private:
 signals:
     void enter();
     void leave();
+
+protected slots:
+    void settingsChanged();
 };
 
 #endif // NOISYSETTINGS_H

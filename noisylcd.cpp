@@ -1,6 +1,7 @@
 #include "noisylcd.h"
 #include "ui_noisylcd.h"
 #include "noisysettings.h"
+#include "ui_noisysettings.h"
 
 #include <QDebug>
 #include <QPainter>
@@ -33,8 +34,7 @@ bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
 void NoisyLCD::paintEvent(QPaintEvent *event)
 {
     double duty = 0.5;
-    unsigned int lineHeight = height() * 60.0 / (4.8 * 1000);
-    //unsigned int lineHeight = height() * settings->ui->refresh / (1000 * settings->ui->tone);
+    unsigned int lineHeight = height() * settings->ui->refresh->value() / (1000 * settings->ui->tone->value());
     unsigned int blackHeight = duty * lineHeight;
     unsigned int i;
 
