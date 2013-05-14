@@ -4,7 +4,7 @@
 #include "ui_noisysettings.h"
 
 const double opacityFull = 1.0;
-const double opacityPartial = 0.3;
+const double opacityPartial = 0.4;
 
 NoisySettings::NoisySettings(QWidget *parent) :
     QDialog(parent),
@@ -15,6 +15,9 @@ NoisySettings::NoisySettings(QWidget *parent) :
 
     installEventFilter(this);
     setWindowOpacity(0.0);
+
+    connect(ui->refresh, SIGNAL(valueChanged(double)), this, SLOT(settingsChanged()));
+    connect(ui->tone, SIGNAL(valueChanged(double)), this, SLOT(settingsChanged()));
 }
 
 NoisySettings::~NoisySettings()
@@ -52,4 +55,10 @@ void NoisySettings::showEvent(QShowEvent *event)
     move(xOffset, yOffset);
     setWindowOpacity(opacityPartial);
     hasBeenShown = true;
+}
+
+void NoisySettings::settingsChanged()
+{
+    parentWidget()->update();
+    qApp->processEvents();
 }
