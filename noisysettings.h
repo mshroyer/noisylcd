@@ -21,7 +21,7 @@ protected:
 
 private:
     Ui::NoisySettings *ui;
-    bool hasBeenShown = false;
+    bool hasBeenShown;
 
 signals:
     void enter();

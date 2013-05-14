@@ -1,5 +1,4 @@
 #include "noisylcd.h"
-#include "ui_noisylcd.h"
 #include "noisysettings.h"
 
 #include <QDebug>

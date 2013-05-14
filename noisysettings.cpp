@@ -11,6 +11,7 @@ NoisySettings::NoisySettings(QWidget *parent) :
     ui(new Ui::NoisySettings)
 {
     ui->setupUi(this);
+    hasBeenShown = false;
 
     installEventFilter(this);
     setWindowOpacity(0.0);
