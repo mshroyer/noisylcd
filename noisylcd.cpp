@@ -33,7 +33,15 @@ bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
 void NoisyLCD::paintEvent(QPaintEvent *event)
 {
     double duty = 0.5;
-    unsigned int lineHeight = height() * settings->ui->refresh->value() / (1000 * settings->ui->tone->value());
+    double tone = settings->ui->tone->value();
+    double refresh = settings->ui->refresh->value();
+    unsigned int lineHeight;
+
+    if (tone > 0)
+        lineHeight = height() * refresh / (1000 * tone);
+    else
+        lineHeight = 4 * height();
+
     unsigned int blackHeight = duty * lineHeight;
     unsigned int i;
 
