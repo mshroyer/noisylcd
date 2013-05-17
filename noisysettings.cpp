@@ -50,8 +50,8 @@ void NoisySettings::showEvent(QShowEvent *event)
     // Position the dialog window in the lowe-right corner of the screen the
     // first time it is displayed.
     QRect frameRect = this->frameGeometry();
-    int xOffset = parentWidget()->width() - frameRect.width() - margin;
-    int yOffset = parentWidget()->height() - frameRect.height() - margin;
+    int xOffset = parentWidget()->x() + parentWidget()->width() - frameRect.width() - margin;
+    int yOffset = parentWidget()->y() + parentWidget()->height() - frameRect.height() - margin;
     move(xOffset, yOffset);
     setWindowOpacity(opacityPartial);
     hasBeenShown = true;
