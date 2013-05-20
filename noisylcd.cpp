@@ -6,7 +6,12 @@
 #include <QPainter>
 #include <QPaintEvent>
 
-NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
+static inline int round(double d)
+{
+    return static_cast<int>(d + 0.5);
+}
+
+NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent), refresh(60), lines(20)
 {
     settings = new NoisySettings(this);
 
@@ -18,6 +23,11 @@ NoisyLCD::NoisyLCD(QWidget *parent) : QMainWindow(parent)
 
 NoisyLCD::~NoisyLCD()
 {
+}
+
+double NoisyLCD::tone()
+{
+    return height() * refresh / lines;
 }
 
 bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
@@ -32,26 +42,14 @@ bool NoisyLCD::eventFilter(QObject *object, QEvent *event)
 
 void NoisyLCD::paintEvent(QPaintEvent *event)
 {
-    double duty = 0.5;
-    double tone = settings->ui->tone->value();
-    double refresh = settings->ui->refresh->value();
-    unsigned int lineHeight;
-
-    if (tone > 0)
-        lineHeight = height() * refresh / (1000 * tone);
-    else
-        lineHeight = 4 * height();
-
-    unsigned int blackHeight = duty * lineHeight;
+    const double duty = 0.5;
+    const unsigned int blackLines = duty * lines;
     unsigned int i;
-
-    qDebug() << "lineHeight =" << lineHeight;
-    qDebug() << "blackHeight =" << blackHeight;
 
     QPainter p;
     p.begin(this);
     for (i=0; i<height(); i++) {
-        if (i%lineHeight <= blackHeight)
+        if (i%lines <= blackLines)
             p.setPen(Qt::black);
         else
             p.setPen(Qt::white);
@@ -61,6 +59,31 @@ void NoisyLCD::paintEvent(QPaintEvent *event)
     p.end();
 }
 
-void NoisyLCD::updatePattern(int lines, double dutyCycle)
+void NoisyLCD::redraw()
 {
+    update();
+    qApp->processEvents();
+}
+
+void NoisyLCD::setTone(double newTone)
+{
+    // Choose a lines value approximating the indicated tone as closely
+    // as possible.
+    lines = round(height() * refresh / newTone);
+    emit toneChanged(tone());
+    redraw();
+}
+
+void NoisyLCD::incTone()
+{
+    lines++;
+    emit toneChanged(tone());
+    redraw();
+}
+
+void NoisyLCD::decTone()
+{
+    if (lines > 2) lines--;
+    emit toneChanged(tone());
+    redraw();
 }

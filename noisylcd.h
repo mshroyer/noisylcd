@@ -12,6 +12,7 @@ class NoisyLCD : public QMainWindow
 public:
     explicit NoisyLCD(QWidget *parent = 0);
     ~NoisyLCD();
+    double tone();
 
 protected:
     bool eventFilter(QObject *object, QEvent *event);
@@ -20,12 +21,20 @@ protected:
 private:
     NoisySettings *settings;
     QGraphicsView *gv;
+    // Monitor's refresh rate in Hz
+    double refresh;
+    // Pixel height of one black/white bar pair
+    unsigned int lines;
+    void redraw();
 
 signals:
     void mouseReleaseEvent(QMouseEvent *);
+    void toneChanged(double);
 
 public slots:
-    void updatePattern(int lines, double dutyCycle);
+    void setTone(double newTone);
+    void incTone();
+    void decTone();
 };
 
 #endif // NOISYLCD_H

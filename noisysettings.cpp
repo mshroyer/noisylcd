@@ -1,5 +1,4 @@
 #include <QRect>
-
 #include "noisysettings.h"
 #include "ui_noisysettings.h"
 
@@ -16,8 +15,9 @@ NoisySettings::NoisySettings(QWidget *parent) :
     installEventFilter(this);
     setWindowOpacity(0.0);
 
-    connect(ui->refresh, SIGNAL(valueChanged(double)), this, SLOT(settingsChanged()));
-    connect(ui->tone, SIGNAL(valueChanged(double)), this, SLOT(settingsChanged()));
+    connect(ui->refresh, SIGNAL(valueChanged(double)), parent, SLOT(setRefresh(double)));
+    connect(ui->tone, SIGNAL(valueChanged(double)), parent, SLOT(setTone(double)));
+    connect(parent, SIGNAL(toneChanged(double)), ui->tone, SLOT(setValue(double)));
 }
 
 NoisySettings::~NoisySettings()
@@ -55,10 +55,4 @@ void NoisySettings::showEvent(QShowEvent *event)
     move(xOffset, yOffset);
     setWindowOpacity(opacityPartial);
     hasBeenShown = true;
-}
-
-void NoisySettings::settingsChanged()
-{
-    parentWidget()->update();
-    qApp->processEvents();
 }
