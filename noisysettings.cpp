@@ -1,4 +1,5 @@
 #include <QRect>
+#include "noisylcd.h"
 #include "noisysettings.h"
 #include "ui_noisysettings.h"
 
@@ -16,7 +17,7 @@ NoisySettings::NoisySettings(QWidget *parent) :
     setWindowOpacity(0.0);
 
     connect(ui->refresh, SIGNAL(valueChanged(double)), parent, SLOT(setRefresh(double)));
-    connect(ui->tone, SIGNAL(valueChanged(double)), parent, SLOT(setTone(double)));
+    connect(ui->tone, SIGNAL(editingFinished()), this, SLOT(toneEditingFinished()));
     connect(parent, SIGNAL(toneChanged(double)), ui->tone, SLOT(setValue(double)));
 }
 
@@ -55,4 +56,9 @@ void NoisySettings::showEvent(QShowEvent *event)
     move(xOffset, yOffset);
     setWindowOpacity(opacityPartial);
     hasBeenShown = true;
+}
+
+void NoisySettings::toneEditingFinished()
+{
+    static_cast<NoisyLCD *>(parentWidget())->setTone(ui->tone->value());
 }

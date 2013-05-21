@@ -32,6 +32,7 @@ signals:
     void toneChanged(double);
 
 public slots:
+    void setRefresh(double newRefresh);
     void setTone(double newTone);
     void incTone();
     void decTone();

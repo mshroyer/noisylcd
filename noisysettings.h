@@ -26,6 +26,9 @@ private:
 signals:
     void enter();
     void leave();
+
+private slots:
+    void toneEditingFinished();
 };
 
 #endif // NOISYSETTINGS_H

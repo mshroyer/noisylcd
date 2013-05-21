@@ -65,6 +65,16 @@ void NoisyLCD::redraw()
     qApp->processEvents();
 }
 
+void NoisyLCD::setRefresh(double newRefresh)
+{
+    refresh = newRefresh;
+
+    // We're not reinterpreting lines here, so changing the refresh rate can
+    // result in a new effective tone.
+    emit toneChanged(tone());
+    redraw();
+}
+
 void NoisyLCD::setTone(double newTone)
 {
     // Choose a lines value approximating the indicated tone as closely
@@ -77,6 +87,7 @@ void NoisyLCD::setTone(double newTone)
 void NoisyLCD::incTone()
 {
     lines++;
+    qDebug() << "toneChanged(" << tone() << ")";
     emit toneChanged(tone());
     redraw();
 }
