@@ -57,8 +57,11 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="maximum">
+    <double>99999.990000000005239</double>
+   </property>
    <property name="value">
-    <double>4.800000000000000</double>
+    <double>4800.000000000000000</double>
    </property>
   </widget>
   <widget class="QLabel" name="toneLabel">
@@ -71,7 +74,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Tone (kHz)</string>
+    <string>Tone (Hz)</string>
    </property>
   </widget>
  </widget>
