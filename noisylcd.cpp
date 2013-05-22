@@ -87,7 +87,6 @@ void NoisyLCD::setTone(double newTone)
 void NoisyLCD::incTone()
 {
     lines++;
-    qDebug() << "toneChanged(" << tone() << ")";
     emit toneChanged(tone());
     redraw();
 }
