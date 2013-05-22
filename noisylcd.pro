@@ -14,10 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         noisylcd.cpp \
-    noisysettings.cpp
+    noisysettings.cpp \
+    tonespinbox.cpp
 
 HEADERS  += noisylcd.h \
-    noisysettings.h
+    noisysettings.h \
+    tonespinbox.h
 
 FORMS    += \
     noisysettings.ui

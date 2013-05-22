@@ -48,7 +48,7 @@
     <string>Refresh rate (Hz)</string>
    </property>
   </widget>
-  <widget class="QDoubleSpinBox" name="tone">
+  <widget class="ToneSpinBox" name="tone">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -78,6 +78,13 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ToneSpinBox</class>
+   <extends>QDoubleSpinBox</extends>
+   <header>tonespinbox.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

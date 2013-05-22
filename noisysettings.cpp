@@ -18,6 +18,8 @@ NoisySettings::NoisySettings(QWidget *parent) :
 
     connect(ui->refresh, SIGNAL(valueChanged(double)), parent, SLOT(setRefresh(double)));
     connect(ui->tone, SIGNAL(editingFinished()), this, SLOT(toneEditingFinished()));
+    connect(ui->tone, SIGNAL(stepUp()), parent, SLOT(incTone()));
+    connect(ui->tone, SIGNAL(stepDown()), parent, SLOT(decTone()));
     connect(parent, SIGNAL(toneChanged(double)), ui->tone, SLOT(setValue(double)));
 }
 
@@ -48,7 +50,7 @@ void NoisySettings::showEvent(QShowEvent *event)
     if (hasBeenShown)
         return;
 
-    // Position the dialog window in the lowe-right corner of the screen the
+    // Position the dialog window in the lower-right corner of the screen the
     // first time it is displayed.
     QRect frameRect = this->frameGeometry();
     int xOffset = parentWidget()->x() + parentWidget()->width() - frameRect.width() - margin;
