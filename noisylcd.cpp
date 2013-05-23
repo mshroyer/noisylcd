@@ -62,7 +62,7 @@ void NoisyLCD::paintEvent(QPaintEvent *event)
 void NoisyLCD::redraw()
 {
     update();
-    qApp->processEvents();
+    //qApp->processEvents();
 }
 
 void NoisyLCD::setRefresh(double newRefresh)
